@@ -91,19 +91,19 @@ class LoggerConfig {
     /**
      * @brief Returns an optional reference to the file‑sink configuration.
      *
+     * @return const std::optional<FileSinkConfig>&
+     *
      * @note Use this to inspect or read the settings after building the
      * configuration.
-     *
-     * @return const std::optional<FileSinkConfig>&
      */
     const std::optional<FileSinkConfig>& FileConfig() const;
 
     /**
      * @brief Returns an optional reference to the console‑sink configuration.
      *
-     * @note Use this to inspect the console sink settings.
-     *
      * @return const std::optional<ConsoleSinkConfig>&
+     *
+     * @note Use this to inspect the console sink settings.
      */
     const std::optional<ConsoleSinkConfig>& ConsoleConfig() const;
 
