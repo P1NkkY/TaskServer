@@ -21,7 +21,7 @@ enum class Severity {
 };
 
 BOOST_DESCRIBE_ENUM(Severity, Trace, Debug, Info, Warning, Error, Critical,
-                    None);
+                    None)
 
 class ILogger {
    public:

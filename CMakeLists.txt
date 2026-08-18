@@ -18,8 +18,6 @@ add_subdirectory(common)
 
 add_executable(${PROJECT_NAME} main.cpp)
 
-add_subdirectory(common/logger_interface)
-
 option(BUILD_TESTS "Build task server tests" ON)
 option(BUILD_EXAMPLES "Build task server examples" ON)
 
