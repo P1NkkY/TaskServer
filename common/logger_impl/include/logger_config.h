@@ -73,10 +73,7 @@ class LoggerConfig {
      * @note Overrides previous file config when method calls multiple times.
      */
     LoggerConfig& WithFile(std::string filename,
-                           Severity level = Severity::Error) {
-        file_config_.emplace(std::move(filename), level);
-        return *this;
-    }
+                           Severity level = Severity::Error);
 
     /**
      * @brief Adds a console (standard output) logging sink to the
@@ -89,10 +86,7 @@ class LoggerConfig {
      * @note Overrides previous file config when method calls multiple
      * times.
      */
-    LoggerConfig& WithConsole(Severity level = Severity::Error) {
-        console_config_.emplace(level);
-        return *this;
-    }
+    LoggerConfig& WithConsole(Severity level = Severity::Error);
 
     /**
      * @brief Returns an optional reference to the file‑sink configuration.
@@ -102,9 +96,7 @@ class LoggerConfig {
      *
      * @return const std::optional<FileSinkConfig>&
      */
-    const std::optional<FileSinkConfig>& FileConfig() const {
-        return file_config_;
-    }
+    const std::optional<FileSinkConfig>& FileConfig() const;
 
     /**
      * @brief Returns an optional reference to the console‑sink configuration.
@@ -113,9 +105,7 @@ class LoggerConfig {
      *
      * @return const std::optional<ConsoleSinkConfig>&
      */
-    const std::optional<ConsoleSinkConfig>& ConsoleConfig() const {
-        return console_config_;
-    }
+    const std::optional<ConsoleSinkConfig>& ConsoleConfig() const;
 
    private:
     std::optional<FileSinkConfig> file_config_;

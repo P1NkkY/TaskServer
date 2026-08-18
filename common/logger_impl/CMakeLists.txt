@@ -1,4 +1,4 @@
-add_library(logger_impl include/logger_config.h src/sink_logger.cpp)
+add_library(logger_impl include/logger_config.h src/logger_config.cpp)
 
 target_include_directories(
     logger_impl PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include
