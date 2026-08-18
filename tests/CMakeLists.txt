@@ -12,6 +12,13 @@ file(
 
 add_executable(tests ${TEST_SOURCES})
 
-target_link_libraries(tests PRIVATE gtest::gtest Boost::headers describe)
+target_link_libraries(
+    tests
+    PRIVATE gtest::gtest
+            Boost::headers
+            describe
+            logger_interface
+            logger_impl
+)
 
 gtest_discover_tests(tests)

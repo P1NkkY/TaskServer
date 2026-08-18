@@ -53,10 +53,14 @@ class LoggerConfig {
     /**
      * @brief Construct a new Logger Config object with no sinks defined.
      *
-     * @note Use the WithFile() and WithConsole() methods to add sinks.
+     * @note Use the WithFile() and WithConsole() methods to add config sinks.
      *
      */
-    explicit LoggerConfig() = default;
+    LoggerConfig() = default;
+    LoggerConfig(const LoggerConfig&) = delete;
+    LoggerConfig& operator=(const LoggerConfig&) = delete;
+    LoggerConfig(LoggerConfig&&) = default;
+    LoggerConfig& operator=(LoggerConfig&&) = default;
 
     /**
      * @brief Adds a file‑based logging sink to the configuration.
@@ -65,8 +69,10 @@ class LoggerConfig {
      * @param level Minimum severity level for messages written to this file
      *
      * @return LoggerConfig& A reference to *this to enable method chaining.
+     *
+     * @note Overrides previous file config when method calls multiple times.
      */
-    LoggerConfig& WithFile(const std::string& filename,
+    LoggerConfig& WithFile(std::string filename,
                            Severity level = Severity::Error) {
         file_config_.emplace(std::move(filename), level);
         return *this;
@@ -79,6 +85,9 @@ class LoggerConfig {
      * @param level Minimum severity level for messages printed to the console.
      *
      * @return LoggerConfig& A reference to *this to enable method chaining.
+     *
+     * @note Overrides previous file config when method calls multiple
+     * times.
      */
     LoggerConfig& WithConsole(Severity level = Severity::Error) {
         console_config_.emplace(level);
