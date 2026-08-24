@@ -1,6 +1,5 @@
 #pragma once
 
-#include <boost/log/attributes/mutable_constant.hpp>
 #include <boost/log/expressions/keyword.hpp>
 
 #include "describe_enum.h"

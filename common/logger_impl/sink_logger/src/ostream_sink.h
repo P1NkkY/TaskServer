@@ -8,48 +8,42 @@ namespace logger {
 namespace sinks {
 
 /**
- * @brief File-based logging sink. This sink writes log records to a file using
- * Boost.Log text_ostream_backend. It is configured via FileSinkConfig.
+ * @brief Console logging sink. This sink writes log records to std::clog using
+ * Boost.Log text_ostream_backend. It is configured via ConsoleSinkConfig.
  *
  * @note The sink initializes itself in the constructor.
  */
-class OfstreamSink : public ISink {
+class OstreamSink : public ISink {
    public:
     /**
-     * @brief Constructs the file sink and immediately initializes it.
+     * @brief Constructs the console sink and immediately initializes it.
      *
-     * @param config Configuration for the file sink
+     * @param config Configuration for the console sink
      *
-     * @throws std::runtime_error If filename is empty or file cannot be opened.
+     * @throws std::runtime_error If initialization fails.
      */
-    explicit OfstreamSink(LoggerConfig&& config);
+    explicit OstreamSink(ConsoleSinkConfig config);
 
-    /**
-     * @brief Returns the sink object.
-     *
-     * @return boost::shared_ptr<boost::log::sinks::sink>
-     */
     boost::shared_ptr<boost::log::sinks::sink> GetSink() override;
 
    private:
     /**
-     * @brief Initializes and configures a file sink for logging. Creates a text
-     * output stream sink that writes log messages to the specified file.
+     * @brief Initializes the console output sink. Performs complete setup of
+     * the console sink by:
+     * 1. Creating the sink backend and frontend components
+     * 2. Configuring formatting and filtering rules
      *
-     * @throws std::runtime_error if the log file cannot be opened
      */
     void Init();
 
     /**
-     * @brief Creates and initializes a file-based logging sink.
+     * @brief Creates and configures the console output sink components.
      *
      * This function:
-     * 1. Creates a text output stream backend for Boost.Log;
-     * 2. Initializes an ofstream to append to the specified log file;
-     * 3. Verifies the file was successfully opened;
-     * 4. Configures the sink to use the file stream with auto-flush enabled.
-     *
-     * @throws std::runtime_error if the log file cannot be opened
+     * 1. Creates a text output stream backend for Boost.Log
+     * 2. Initializes the synchronous sink frontend with the backend
+     * 3. Attaches std::clog as the output stream with a null deleter
+     * 4. Configures the sink to use with auto-flush enabled.
      */
     void CreateSink();
 
@@ -74,7 +68,7 @@ class OfstreamSink : public ISink {
 
    private:
     boost::shared_ptr<sink_t> sink_;
-    LoggerConfig config_;
+    ConsoleSinkConfig config_;
 };
 
 }  // namespace sinks

@@ -1,1 +1,1 @@
-# Empty CMakeLists.txt
+add_subdirectory(logger)

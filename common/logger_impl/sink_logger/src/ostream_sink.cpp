@@ -1,10 +1,10 @@
-#include "ofstream_sink.h"
+#include "ostream_sink.h"
 
+#include <boost/core/null_deleter.hpp>
 #include <boost/date_time/posix_time/ptime.hpp>
 #include <boost/log/expressions.hpp>
 #include <boost/log/support/date_time.hpp>
 #include <boost/thread/thread.hpp>
-#include <fstream>
 
 #include "attributes.h"
 #include "logger_interface.h"
@@ -15,42 +15,32 @@ namespace common {
 namespace logger {
 namespace sinks {
 
-OfstreamSink::OfstreamSink(LoggerConfig&& config) : config_(std::move(config)) {
-    if (config_.FileConfig()->filename_.empty()) {
-        throw std::runtime_error("OfstreamSink: filename is empty");
-    }
+OstreamSink::OstreamSink(ConsoleSinkConfig config)
+    : config_(std::move(config)) {
     Init();
 }
 
-void OfstreamSink::Init() {
+void OstreamSink::Init() {
     CreateSink();
     SetFormatter();
     SetFilters();
 }
 
-boost::shared_ptr<boost::log::sinks::sink> OfstreamSink::GetSink() {
+boost::shared_ptr<boost::log::sinks::sink> OstreamSink::GetSink() {
     return sink_;
 }
 
-void OfstreamSink::CreateSink() {
+void OstreamSink::CreateSink() {
     boost::shared_ptr<boost::log::sinks::text_ostream_backend> backend =
         boost::make_shared<boost::log::sinks::text_ostream_backend>();
     sink_ = boost::make_shared<sink_t>(backend);
 
-    boost::shared_ptr<std::ofstream> file_stream =
-        boost::make_shared<std::ofstream>(config_.FileConfig()->filename_,
-                                          std::ofstream::app);
-
-    if (!file_stream->is_open()) {
-        throw std::runtime_error("Can not open log file: " +
-                                 config_.FileConfig()->filename_);
-    }
-
-    sink_->locked_backend()->add_stream(file_stream);
+    sink_->locked_backend()->add_stream(
+        boost::shared_ptr<std::ostream>(&std::clog, boost::null_deleter()));
     sink_->locked_backend()->auto_flush(true);
 }
 
-void OfstreamSink::SetFormatter() {
+void OstreamSink::SetFormatter() {
     boost::log::formatter fmt =
         expr::stream
         << expr::format_date_time<boost::posix_time::ptime>("TimeStamp",
@@ -64,8 +54,8 @@ void OfstreamSink::SetFormatter() {
     sink_->set_formatter(fmt);
 }
 
-void OfstreamSink::SetFilters() {
-    sink_->set_filter(severity >= config_.FileConfig()->min_level_);
+void OstreamSink::SetFilters() {
+    sink_->set_filter(severity >= config_.min_level_);
 }
 
 }  // namespace sinks

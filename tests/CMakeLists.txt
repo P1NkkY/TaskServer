@@ -15,10 +15,10 @@ add_executable(tests ${TEST_SOURCES})
 target_link_libraries(
     tests
     PRIVATE gtest::gtest
-            Boost::headers
+            Boost::log
             describe
             logger_interface
-            logger_impl
+            sink_logger
 )
 
 gtest_discover_tests(tests)

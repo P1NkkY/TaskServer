@@ -1,6 +1,7 @@
 #include "logger_config.h"
 
-namespace common::logger {
+namespace common {
+namespace logger {
 
 LoggerConfig& LoggerConfig::WithFile(std::string filename, Severity level) {
     file_config_.emplace(std::move(filename), level);
@@ -20,4 +21,5 @@ const std::optional<ConsoleSinkConfig>& LoggerConfig::ConsoleConfig() const {
     return console_config_;
 }
 
-}  // namespace common::logger
+}  // namespace logger
+}  // namespace common
