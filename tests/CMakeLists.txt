@@ -10,7 +10,11 @@ file(
     ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp
 )
 
-add_executable(tests ${TEST_SOURCES})
+add_executable(tests ${TEST_SOURCES} utils/test_setup.h utils/test_setup.cpp)
+
+target_include_directories(
+    tests PRIVATE ${CMAKE_SOURCE_DIR}/common/logger_impl/sink_logger/src
+)
 
 target_link_libraries(
     tests

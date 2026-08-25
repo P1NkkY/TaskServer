@@ -11,14 +11,14 @@ class SinkFactory {
    public:
     virtual ~SinkFactory() {}
 
-    virtual ISink* CreateSink() = 0;
+    virtual std::shared_ptr<ISink> CreateSink() = 0;
 };
 
 class OstreamFactory : public SinkFactory {
    public:
     explicit OstreamFactory(ConsoleSinkConfig config);
 
-    ISink* CreateSink() override;
+    std::shared_ptr<ISink> CreateSink() override;
 
    private:
     ConsoleSinkConfig config_;
@@ -28,7 +28,7 @@ class OfstreamFactory : public SinkFactory {
    public:
     explicit OfstreamFactory(FileSinkConfig config);
 
-    ISink* CreateSink() override;
+    std::shared_ptr<ISink> CreateSink() override;
 
    private:
     FileSinkConfig config_;
