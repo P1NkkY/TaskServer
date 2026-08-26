@@ -19,3 +19,5 @@ target_include_directories(
     PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src
 )
 target_link_libraries(sink_logger PRIVATE Boost::log describe logger_interface)
+
+# TODO Correct documentation after unit testing sink logger if necessary
