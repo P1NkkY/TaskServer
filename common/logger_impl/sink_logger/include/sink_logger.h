@@ -16,8 +16,6 @@ class SinkLogger : public ILogger {
      *
      * @param param Input data to create sinks with
      *
-     * @note The global logging filter is not set by default, so all messages of
-     * all severity levels will pass through
      * @note Does not need to set global logging filter, because we use filters
      * inside sinks
      */
@@ -34,11 +32,7 @@ class SinkLogger : public ILogger {
      * This function:
      * 1) Creates a log record with the specified severity level;
      * 2) Checks if the record was successfully created;
-     * 3) If valid:
-     * - Attaches the record to the output stream;
-     * - Writes the message to the stream;
-     * - Flushes the output stream;
-     * - Pushes the completed record to the logger for processing.
+     * 3) Immediately log
      */
     void Log(Severity level, std::string_view message) override;
 
