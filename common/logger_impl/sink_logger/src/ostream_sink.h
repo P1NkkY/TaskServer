@@ -32,7 +32,6 @@ class OstreamSink : public ISink {
      * the console sink by:
      * 1. Creating the sink backend and frontend components
      * 2. Configuring formatting and filtering rules
-     *
      */
     void Init();
 
