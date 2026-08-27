@@ -6,6 +6,7 @@ target_link_libraries(
     task_server
     PRIVATE Boost::log
             describe
+            exception
             logger_interface
             sink_logger
 )

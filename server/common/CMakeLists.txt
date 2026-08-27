@@ -1,3 +1,4 @@
 add_subdirectory(describe)
+add_subdirectory(exception)
 add_subdirectory(logger_interface)
 add_subdirectory(logger_impl)
