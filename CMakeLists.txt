@@ -14,9 +14,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 find_package(Boost REQUIRED)
 include_directories(${Boost_INCLUDE_DIR})
 
-add_subdirectory(common)
-
-add_executable(${PROJECT_NAME} main.cpp)
+add_subdirectory(server)
 
 option(BUILD_TESTS "Build task server tests" ON)
 option(BUILD_EXAMPLES "Build task server examples" ON)
