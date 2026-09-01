@@ -70,7 +70,6 @@ class ITaskRepository {
     /**
      * @brief Обновить информацию о задаче.
      *
-     * @param user_id
      * @param task
      */
     virtual void Update(const Task& task) = 0;
