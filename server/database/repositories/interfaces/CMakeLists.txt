@@ -1,4 +1,10 @@
-add_library(repo_interfaces INTERFACE include/itask_repository.h)
+add_library(
+    repo_interfaces
+    INTERFACE
+    include/itask_repository.h
+    include/iuser_repository.h
+    include/irepo_factory.h
+)
 
 target_include_directories(
     repo_interfaces INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/include
