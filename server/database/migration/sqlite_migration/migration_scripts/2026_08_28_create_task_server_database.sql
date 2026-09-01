@@ -21,7 +21,7 @@ CREATE TABLE users (
 -- Таблица задач. Хранит задачи, созданные пользователями.
 -- 
 -- id - Уникальный идентификатор задачи.
--- owner_id - Идентификатор пользователя задачи.
+-- user_id - Идентификатор пользователя задачи.
 -- title - VARCHAR(255) Заголовок задачи.
 -- description - Подробное описание задачи. 
 -- status - Текущий статус задачи.
@@ -29,12 +29,12 @@ CREATE TABLE users (
 -- =====================================================================
 CREATE TABLE tasks (
     id INTEGER PRIMARY KEY,
-    owner_id INTEGER NOT NULL,
+    user_id INTEGER NOT NULL,
     title VARCHAR(255) NOT NULL,
     description TEXT,
     status VARCHAR(255) NOT NULL,
     created_at TEXT NOT NULL,
-    CONSTRAINT tasks_owner_id_fk FOREIGN KEY (owner_id) REFERENCES users(id) ON DELETE CASCADE,
+    CONSTRAINT tasks_user_id_fk FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
     CONSTRAINT tasks_title_chk CHECK(TRIM(title) <> ''),
     CONSTRAINT tasks_status_chk CHECK (status IN ('Completed', 'InProgress', 'Canceled')),
     CONSTRAINT tasks_created_at_chk CHECK(TRIM(created_at) <> '')

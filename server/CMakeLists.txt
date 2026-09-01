@@ -1,6 +1,7 @@
 add_executable(task_server main.cpp)
 
 add_subdirectory(common)
+add_subdirectory(database)
 
 target_link_libraries(
     task_server
