@@ -25,9 +25,15 @@ class TaskServer(ConanFile):
         boost.without_random = True
         boost.without_type_erasure = True
 
+        # Настройка soci
+        self.options["soci"].with_sqlite3 = True
+        self.options["soci"].with_postgresql = True
+
+
     def requirements(self):
         self.requires("boost/1.90.0")
         self.requires("gtest/1.18.0")
+        self.requires("soci/4.0.3")
 
     def layout(self):
         cmake_layout(self)

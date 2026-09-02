@@ -1,4 +1,6 @@
+find_package(SOCI REQUIRED)
 find_package(GTest REQUIRED)
+
 include(GoogleTest)
 
 cmake_policy(SET CMP0079 NEW)
@@ -23,6 +25,9 @@ target_link_libraries(
             describe
             logger_interface
             sink_logger
+            database_common_interfaces
+            soci_connection
+            ${SOCI_LIBRARIES}
 )
 
 gtest_discover_tests(tests)
